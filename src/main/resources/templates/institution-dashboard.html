@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instituição | Painel</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div class="container narrow-wide">
+    <div class="header-row">
+        <div>
+            <h1>Painel da instituição</h1>
+            <p th:text="${partner.institutionName}"></p>
+        </div>
+        <form th:action="@{/logout}" method="post"><button class="button secondary" type="submit">Sair</button></form>
+    </div>
+
+    <div class="card details-grid">
+        <p><strong>Status do pedido:</strong> <span th:text="${partner.status}"></span></p>
+        <p><strong>Login:</strong> <span th:text="${partner.userAccount.username}"></span></p>
+        <p><strong>Responsável:</strong> <span th:text="${partner.responsibleName}"></span></p>
+        <p><strong>E-mail:</strong> <span th:text="${partner.email}"></span></p>
+        <p><strong>Telefone:</strong> <span th:text="${partner.phone}"></span></p>
+        <p><strong>Cidade/UF:</strong> <span th:text="${partner.city + ' / ' + partner.state}"></span></p>
+        <p class="full-width"><strong>Mensagem do administrador:</strong> <span th:text="${partner.adminNote != null ? partner.adminNote : 'Seu cadastro ainda não possui observações do administrador.'}"></span></p>
+        <p class="full-width"><strong>Motivo enviado no formulário:</strong> <span th:text="${partner.partnershipReason}"></span></p>
+    </div>
+</div>
+</body>
+</html>

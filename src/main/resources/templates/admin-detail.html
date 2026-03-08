@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin | Detalhe do parceiro</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div class="container narrow-wide">
+    <div class="header-row">
+        <div>
+            <h1>Detalhes do parceiro</h1>
+            <p th:text="${partner.institutionName}"></p>
+        </div>
+        <a class="button secondary" th:href="@{/admin/parceiros}">Voltar</a>
+    </div>
+
+    <div th:if="${successMessage}" class="alert success" th:text="${successMessage}"></div>
+
+    <div class="card details-grid">
+        <p><strong>ID:</strong> <span th:text="${partner.id}"></span></p>
+        <p><strong>Status:</strong> <span th:text="${partner.status}"></span></p>
+        <p><strong>Responsável:</strong> <span th:text="${partner.responsibleName}"></span></p>
+        <p><strong>E-mail:</strong> <span th:text="${partner.email}"></span></p>
+        <p><strong>Telefone:</strong> <span th:text="${partner.phone}"></span></p>
+        <p><strong>Cidade/UF:</strong> <span th:text="${partner.city + ' / ' + partner.state}"></span></p>
+        <p><strong>Login gerado:</strong> <span th:text="${partner.userAccount.username}"></span></p>
+        <p><strong>Senha inicial:</strong> <span th:text="${partner.cnpj}"></span></p>
+        <p class="full-width"><strong>Motivo da parceria:</strong> <span th:text="${partner.partnershipReason}"></span></p>
+        <p class="full-width"><strong>Parecer do ADM:</strong> <span th:text="${partner.adminNote != null ? partner.adminNote : 'Sem observações.'}"></span></p>
+    </div>
+
+    <div class="card">
+        <h3>Ações do administrador</h3>
+        <div class="actions-inline">
+            <form th:action="@{'/admin/parceiros/' + ${partner.id} + '/aprovar'}" method="post" class="inline-form">
+                <input type="text" name="adminNote" placeholder="Observação da aprovação">
+                <button class="button" type="submit">Aprovar</button>
+            </form>
+            <form th:action="@{'/admin/parceiros/' + ${partner.id} + '/reprovar'}" method="post" class="inline-form">
+                <input type="text" name="adminNote" placeholder="Observação da reprovação">
+                <button class="button danger" type="submit">Reprovar</button>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

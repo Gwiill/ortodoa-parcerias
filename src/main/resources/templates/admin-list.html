@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin | Parceiros</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div class="container">
+    <div class="header-row">
+        <div>
+            <h1>Pedidos de parceria</h1>
+            <p>Aqui você analisa os cadastros e também o login e a senha inicial de cada parceiro.</p>
+        </div>
+        <form th:action="@{/logout}" method="post"><button class="button secondary" type="submit">Sair</button></form>
+    </div>
+
+    <div class="card">
+        <table>
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Instituição</th>
+                <th>Status</th>
+                <th>Login</th>
+                <th>Senha inicial</th>
+                <th>Ações</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="partner : ${partners}">
+                <td th:text="${partner.id}"></td>
+                <td th:text="${partner.institutionName}"></td>
+                <td><span class="badge" th:text="${partner.status}"></span></td>
+                <td th:text="${partner.userAccount.username}"></td>
+                <td th:text="${partner.cnpj}"></td>
+                <td><a th:href="@{'/admin/parceiros/' + ${partner.id}}">Ver detalhes</a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

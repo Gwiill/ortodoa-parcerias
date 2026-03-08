@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | ORTODOA</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div class="container narrow">
+    <div class="card">
+        <h1>ORTODOA</h1>
+        <h1>Entrar</h1>
+        <h2>Solicite parceria institucional</h2>
+
+        <p>Use o login do administrador ou da instituição.</p>
+
+        <div th:if="${param.error}" class="alert error">Usuário, senha ou permissão inválida.</div>
+        <div th:if="${param.logout}" class="alert success">Logout realizado com sucesso.</div>
+
+        <form th:action="@{/login}" method="post" class="form-grid single-column">
+            <div>
+                <label>Login</label>
+                <input type="text" name="username">
+            </div>
+            <div>
+                <label>Senha</label>
+                <input type="password" name="password">
+            </div>
+            <button class="button" type="submit">Acessar</button>
+        </form>
+
+        <div class="hint top-gap">
+            <p><strong>ADM teste:</strong> admin@ortodoa.com / admin123</p>
+            <p><strong>Instituição já aprovada:</strong> hospital.aprovado@ortodoa.com / 12345678000199</p>
+            <p><a th:href="@{/}">Voltar ao formulário</a></p>
+        </div>
+    </div>
+</div>
+</body>
+</html>
