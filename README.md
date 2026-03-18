@@ -61,6 +61,3 @@ Use estas configurações:
 - `controller/` -> fluxo web
 - `config/` -> segurança e carga inicial
 - `templates/` -> páginas Thymeleaf
-
-## Observação didática
-O código foi documentado com comentários para facilitar estudo e apresentação em projeto acadêmico ou portfólio.
