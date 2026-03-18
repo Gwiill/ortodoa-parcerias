@@ -35,11 +35,11 @@
         <h3>Ações do administrador</h3>
         <div class="actions-inline">
             <form th:action="@{'/admin/parceiros/' + ${partner.id} + '/aprovar'}" method="post" class="inline-form">
-                <input type="text" name="adminNote" placeholder="Observação da aprovação">
+                <textearea name="text" name="adminNote" placeholder="Observação da aprovação"></textearea>
                 <button class="button" type="submit">Aprovar</button>
             </form>
             <form th:action="@{'/admin/parceiros/' + ${partner.id} + '/reprovar'}" method="post" class="inline-form">
-                <input type="text" name="adminNote" placeholder="Observação da reprovação">
+                <textarea name="text" name="adminNote" placeholder="Observação da reprovação"></textarea>
                 <button class="button danger" type="submit">Reprovar</button>
             </form>
         </div>

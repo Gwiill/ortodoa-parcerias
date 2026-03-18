@@ -20,7 +20,8 @@ import java.util.List;
  * - criar pedido de parceria;
  * - gerar login da instituição;
  * - aprovar ou reprovar;
- * - habilitar ou desabilitar acesso.
+ * - habilitar ou desabilitar acesso;
+ * - enviar e-mails automáticos do fluxo.
  */
 @Service
 public class PartnerInstitutionService {
@@ -28,13 +29,16 @@ public class PartnerInstitutionService {
     private final PartnerInstitutionRepository partnerInstitutionRepository;
     private final UserAccountRepository userAccountRepository;
     private final PasswordEncoder passwordEncoder;
+    private final EmailService emailService;
 
     public PartnerInstitutionService(PartnerInstitutionRepository partnerInstitutionRepository,
                                      UserAccountRepository userAccountRepository,
-                                     PasswordEncoder passwordEncoder) {
+                                     PasswordEncoder passwordEncoder,
+                                     EmailService emailService) {
         this.partnerInstitutionRepository = partnerInstitutionRepository;
         this.userAccountRepository = userAccountRepository;
         this.passwordEncoder = passwordEncoder;
+        this.emailService = emailService;
     }
 
     @Transactional
@@ -51,7 +55,11 @@ public class PartnerInstitutionService {
         partnerInstitution.setCreatedAt(LocalDateTime.now());
         partnerInstitution.setUserAccount(account);
 
-        return partnerInstitutionRepository.save(partnerInstitution);
+        PartnerInstitution savedInstitution = partnerInstitutionRepository.save(partnerInstitution);
+
+        emailService.sendRequestReceivedEmail(savedInstitution);
+
+        return savedInstitution;
     }
 
     public List<PartnerInstitution> listAll() {
@@ -79,7 +87,10 @@ public class PartnerInstitutionService {
         institution.setAdminNote(adminNote);
         institution.setReviewedAt(LocalDateTime.now());
         institution.getUserAccount().setEnabled(true);
-        partnerInstitutionRepository.save(institution);
+
+        PartnerInstitution savedInstitution = partnerInstitutionRepository.save(institution);
+
+        emailService.sendApprovedEmail(savedInstitution);
     }
 
     @Transactional
@@ -89,7 +100,10 @@ public class PartnerInstitutionService {
         institution.setAdminNote(adminNote);
         institution.setReviewedAt(LocalDateTime.now());
         institution.getUserAccount().setEnabled(false);
-        partnerInstitutionRepository.save(institution);
+
+        PartnerInstitution savedInstitution = partnerInstitutionRepository.save(institution);
+
+        emailService.sendRejectedEmail(savedInstitution);
     }
 
     private void validateUniqueFields(PartnerInstitution partnerInstitution) {
