@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin | Detalhe do parceiro</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div class="topbar"><div class="brand"><span class="brand-mark">HC</span><span>Portal de Parcerias ORTODOA</span></div></div>
+<div class="container narrow-wide">
+    <div class="header-row">
+        <div>
+            <h1>Detalhes do parceiro</h1>
+            <p th:text="${partner.institutionName}"></p>
+        </div>
+        <a class="button secondary" th:href="@{/admin/parceiros}">Voltar</a>
+    </div>
+
+    <div th:if="${successMessage}" class="alert success" th:text="${successMessage}"></div>
+
+    <div class="card details-grid">
+        <p><strong>ID:</strong> <span th:text="${partner.id}"></span></p>
+        <p><strong>Status:</strong>
+            <span class="badge"
+                  th:classappend="${partner.status.name() == 'APROVADO' ? ' badge-success' : (partner.status.name() == 'REPROVADO' ? ' badge-danger' : ' badge-warning')}"
+                  th:text="${partner.status.name() == 'PENDENTE' ? 'APROVAÇÃO PENDENTE' : partner.status}"></span>
+        </p>
+        <p><strong>Responsável:</strong> <span th:text="${partner.responsibleName}"></span></p>
+        <p><strong>E-mail:</strong> <span th:text="${partner.email}"></span></p>
+        <p><strong>Telefone:</strong> <span th:text="${partner.phone}"></span></p>
+        <p><strong>Cidade/UF:</strong> <span th:text="${partner.city + ' / ' + partner.state}"></span></p>
+        <p><strong>Login gerado:</strong> <span th:text="${partner.userAccount.username}"></span></p>
+        <p><strong>Senha:</strong> <span>Senha aleatória enviada por e-mail</span></p>
+        <p class="full-width"><strong>Motivo da parceria:</strong> <span th:text="${partner.partnershipReason}"></span></p>
+        <p class="full-width"><strong>Observação registrada:</strong> <span th:text="${partner.adminNote != null ? partner.adminNote : 'Sem observações.'}"></span></p>
+    </div>
+
+    <div class="card">
+        <h3>Análise do administrador</h3>
+        <p class="muted">Preencha uma única observação e escolha se deseja aprovar ou reprovar a solicitação.</p>
+        <form method="post" class="form-grid single-column">
+
+            <input type="hidden"
+                   th:name="${_csrf.parameterName}"
+                   th:value="${_csrf.token}" />
+
+            <textarea name="adminNote" rows="5" placeholder="Digite a observação da análise"></textarea>
+
+            <div class="actions-inline">
+                <button class="button"
+                        type="submit"
+                        th:formaction="@{'/admin/parceiros/' + ${partner.id} + '/aprovar'}">
+                    Aprovar
+                </button>
+
+                <button class="button danger"
+                        type="submit"
+                        th:formaction="@{'/admin/parceiros/' + ${partner.id} + '/reprovar'}">
+                    Reprovar
+                </button>
+            </div>
+
+        </form>
+    </div>
+</div>
+</body>
+</html>

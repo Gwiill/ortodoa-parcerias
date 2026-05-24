@@ -1,0 +1,511 @@
+:root {
+    --hc-blue: #005a9c;
+    --hc-blue-dark: #003f70;
+    --hc-blue-soft: #e8f2fb;
+    --bg: #eef3f8;
+    --card: #ffffff;
+    --text: #1f2937;
+    --muted: #64748b;
+    --border: #d6e0ea;
+    --success: #15803d;
+    --danger: #b91c1c;
+    --warning: #ca8a04;
+}
+
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: linear-gradient(180deg, #f8fbff 0%, var(--bg) 100%);
+    color: var(--text);
+    min-height: 100vh;
+}
+
+.topbar {
+    background: var(--hc-blue);
+    color: #fff;
+    border-bottom: 4px solid var(--hc-blue-dark);
+    padding: 14px 28px;
+    box-shadow: 0 4px 16px rgba(0, 63, 112, 0.22);
+}
+
+.brand { display: flex; align-items: center; gap: 12px; font-weight: 700; }
+.brand.large { margin-bottom: 34px; font-size: 18px; }
+.brand-mark {
+    width: 42px;
+    height: 42px;
+    border-radius: 6px;
+    background: #fff;
+    color: var(--hc-blue);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    letter-spacing: -1px;
+}
+
+.container { max-width: 1120px; margin: 0 auto; padding: 42px 20px; }
+.narrow { max-width: 520px; }
+.narrow-wide { max-width: 920px; }
+
+.card, .header-card {
+    background: var(--card);
+    border-radius: 10px;
+    padding: 28px;
+    border: 1px solid var(--border);
+    box-shadow: 0 10px 26px rgba(15, 23, 42, 0.08);
+    margin-bottom: 20px;
+}
+
+.hero { display: flex; justify-content: space-between; align-items: center; gap: 20px; border-top: 5px solid var(--hc-blue); }
+
+h1, h2, h3 { color: var(--hc-blue-dark); margin-top: 0; }
+p { color: var(--text); line-height: 1.5; }
+.muted { color: var(--muted); }
+
+.header-row { display: flex; justify-content: space-between; align-items: center; gap: 18px; margin-bottom: 20px; }
+.header-row p { margin: 4px 0 0; color: var(--muted); }
+
+.form-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+.single-column { grid-template-columns: 1fr; }
+.full-width { grid-column: 1 / -1; }
+
+label { display: block; font-weight: 700; margin-bottom: 7px; color: var(--hc-blue-dark); }
+
+input, textarea {
+    width: 100%;
+    padding: 13px 14px;
+    border-radius: 7px;
+    border: 1px solid #cbd5e1;
+    background: #fff;
+    color: var(--text);
+    outline: none;
+    transition: 0.2s ease;
+}
+
+input:focus, textarea:focus { border-color: var(--hc-blue); box-shadow: 0 0 0 3px rgba(0, 90, 156, 0.14); }
+
+.button {
+    background: var(--hc-blue);
+    color: #fff;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 7px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    font-weight: 700;
+    font-size: 15px;
+    transition: 0.2s ease;
+}
+.button:hover { background: var(--hc-blue-dark); transform: translateY(-1px); }
+.button.secondary { background: #fff; color: var(--hc-blue); border: 1px solid var(--hc-blue); }
+.button.secondary:hover { background: var(--hc-blue-soft); }
+.button.danger { background: var(--danger); }
+.button.danger:hover { background: #991b1b; }
+
+.form-actions { display: flex; justify-content: flex-end; }
+.actions-inline { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+
+.alert { padding: 14px 16px; border-radius: 8px; margin-bottom: 18px; font-weight: 700; }
+.alert.success { background: #dcfce7; color: var(--success); border: 1px solid #86efac; }
+.alert.error { background: #fee2e2; color: var(--danger); border: 1px solid #fecaca; }
+.error-text { color: var(--danger); display: block; margin-top: 6px; }
+
+.badge { padding: 7px 11px; border-radius: 999px; font-size: 12px; font-weight: 800; display: inline-block; }
+.badge-success { background: #dcfce7; color: var(--success); }
+.badge-danger { background: #fee2e2; color: var(--danger); }
+.badge-warning { background: #fef3c7; color: var(--warning); }
+
+.status-panel { border-radius: 10px; padding: 22px 26px; margin-bottom: 20px; border: 1px solid var(--border); }
+.status-panel span { display: block; font-size: 14px; margin-bottom: 6px; color: var(--muted); }
+.status-panel strong { font-size: 26px; }
+.status-success { background: #dcfce7; color: var(--success); border-color: #86efac; }
+.status-danger { background: #fee2e2; color: var(--danger); border-color: #fecaca; }
+.status-warning { background: #fef3c7; color: var(--warning); border-color: #fde68a; }
+
+.details-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 22px; }
+.details-grid p { margin: 0; }
+
+.table-card { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; }
+th { background: var(--hc-blue-soft); color: var(--hc-blue-dark); text-align: left; }
+th, td { padding: 13px 12px; border-bottom: 1px solid var(--border); }
+tr:hover td { background: #f8fbff; }
+.link-action { color: var(--hc-blue); font-weight: 700; text-decoration: none; }
+.link-action:hover { text-decoration: underline; }
+
+.hint { background: #f8fbff; }
+.top-gap { margin-top: 20px; }
+
+.login-page { background: #dfeaf4; }
+.login-shell { min-height: 100vh; display: grid; grid-template-columns: 1.05fr 0.95fr; }
+.login-banner { background: linear-gradient(135deg, var(--hc-blue), var(--hc-blue-dark)); color: #fff; padding: 56px; display: flex; flex-direction: column; justify-content: center; }
+.login-banner h1, .login-banner p { color: #fff; }
+.login-banner h1 { font-size: 42px; margin-bottom: 8px; }
+.login-card { margin: auto; width: min(460px, calc(100% - 32px)); }
+
+@media (max-width: 760px) {
+    .form-grid, .details-grid, .login-shell { grid-template-columns: 1fr; }
+    .hero, .header-row { flex-direction: column; align-items: flex-start; }
+    .login-banner { padding: 34px 24px; }
+}
+
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.metric-card span {
+    display: block;
+    color: #64748b;
+    font-size: 14px;
+    margin-bottom: 8px;
+}
+
+.metric-card strong {
+    font-size: 32px;
+    color: #003b71;
+}
+
+.metric-card.success strong { color: #15803d; }
+.metric-card.danger strong { color: #b91c1c; }
+.metric-card.warning strong { color: #ca8a04; }
+
+.chart-wrapper {
+    display:flex;
+    justify-content:center;
+    padding:20px 0;
+}
+
+.chart-legend {
+    display:flex;
+    justify-content:center;
+    gap:20px;
+    margin-top:10px;
+}
+
+.chart-legend i {
+    width:14px;
+    height:14px;
+    border-radius:50%;
+    display:inline-block;
+}
+
+.legend-success { background:#22c55e; }
+.legend-danger { background:#ef4444; }
+.legend-warning { background:#facc15; }
+
+552760b3-0bd8-4c91-912c-3cf1026dfebb.png
+
+a5ab4cb6-f569-4255-b5cb-0651e9593fa5.png
+
+8c8d51c8-fc55-40b1-bfc0-81cc7d820ed4.png
+cff1ef63-695c-4e10-8865-b72b7b6256ba.png
+
+76de1ee0-56cc-48c1-a98e-67b8dfb16ff6.png
+
+1922bada-7d97-4896-95b2-0905acc4fd12.png
+
+93ac1ef4-ad38-44d8-a4d2-7c68941c6587.png
+
+5e1b02a8-5c46-4179-b5e4-3e6acb7c0e14.png
+
+
+ortodoa-parcerias_versão2.0.zip
+Arquivo zip
+Chat, após uma apresentação para meu professor deste projeto que estou fazendo, ele me propós algumas melhoras na minha aplicação:
+
+ 1 - Alterar a tela de aprovação de "aprovar" e "reprovar", contendo apenas uma caixa de observação da liberação.
+
+2 - Ele quer que o possível parceiro ao preenche o formulário, além de já estar recebendo e e-mail via email-pit do docker, que consigo acessar a área do parceiro e mostre um status de "aprovação pendente" quando aida não aprovada.
+
+3 - Propós também que a senha não seja o CNPJ da empresa parceira, mas sim que seja gerada uma senha aleatória e enviada no emailpit junto com as demais informações.
+
+4 - As opções de status sejam das cores Aprovado -> VERDE, reprovado -> VERMELHO, pendente -> AMARELO.
+
+E também gostaria que deixasse todas as telas no estilo do portal do HC, segue link:
+
+https://sistemashc.hc.fm.usp.br/Conta/Login?ReturnUrl=http://autoatendimento.hc.fm.usp.br/
+
+
+Ao aprovar retornou este erro:
+
+
+Texto colado.txt
+Documento
+
+c824b9c8-130d-4bba-aed3-6c1412db2955.png
+Nesse caso preciso que volte mostrando a senha aleatória criada e não a inciial novamente.
+
+Exatamente. Agora seu fluxo ficou profissional e seguro.
+
+🔐 Antes (inseguro)
+A senha era:
+
+CNPJ da empresa
+Problemas:
+
+fácil de descobrir;
+
+previsível;
+
+qualquer pessoa com o CNPJ conseguiria tentar login;
+
+baixa segurança.
+
+✅ Agora (correto)
+O sistema gera:
+
+senha aleatória
+Exemplo:
+
+Ax#92LmPq
+🔒 Depois ela é criptografada
+O sistema faz:
+
+passwordEncoder.encode(senha)
+Então no banco ela vira algo assim:
+
+$2a$10$sdkfjhsdkjfhskdjf...
+Ou seja:
+
+✔️ o sistema consegue VALIDAR;
+
+❌ mas não consegue mais VER a senha original.
+
+👤 Então como o parceiro acessa?
+Ele usa:
+
+email
++
+senha aleatória recebida no primeiro e-mail
+🟡 Enquanto pendente
+Ele consegue entrar:
+
+/login
+e ver:
+
+APROVAÇÃO PENDENTE
+🟢 Após aprovado
+Entra com A MESMA senha.
+
+Agora verá:
+
+APROVADO
+🔴 Se reprovado
+Também entra com A MESMA senha.
+
+Agora verá:
+
+REPROVADO
+🔥 Resumo MAIS IMPORTANTE
+A senha:
+
+✔️ é criada uma vez
+✔️ enviada uma vez
+✔️ usada para sempre
+❌ nunca mais é exibida pelo sistema
+
+Isso é exatamente como sistemas reais funcionam.
+
+
+e67e3825-1240-4664-ae6e-b59fedc3a8e0.png
+Chat, o projeto esta perfeito, o meu professor me desafiou a fazer um Dashboard dento do painel do ADM para garantir um 10 na nota, como na imagem anexada, esse dashboard deve atualizar conforme o ADM irá realizar as aprovações, o dash deverá mostrar em gráfico de PIZZA, quantos foram autorizados, recusados e quais ainda estão pendentes.
+
+Consegue criar e implementar no projeto?
+
+A aplicação está rodando na porta:
+
+8080
+Você pode acessar:
+
+Sistema:
+
+http://localhost:8080
+Login:
+
+http://localhost:8080/login
+Dashboard ADM:
+
+http://localhost:8080/admin/parceiros
+Painel parceiro:
+
+http://localhost:8080/instituicao/painel
+H2 Console:
+
+http://localhost:8080/h2-console
+MailPit:
+
+http://localhost:8025
+
+O dash board aparecerá quando tiver formulários para aprovar?
+
+Sim.
+
+O Dashboard aparece mesmo sem dados, mas ele começa a mostrar informações conforme os formulários forem chegando.
+
+Exemplo:
+
+Primeiro acesso (sem parceiros)
+O gráfico ficará vazio ou com:
+
+Sem dados
+E os cards:
+
+Aprovados: 0
+Reprovados: 0
+Pendentes: 0
+Após alguém enviar formulário
+Automaticamente:
+
+Pendentes: 1
+O gráfico pizza já mostra a parte amarela.
+
+Após o ADM aprovar
+Automaticamente:
+
+Aprovados: 1
+Pendentes: 0
+Agora o gráfico muda para verde.
+
+Após reprovar outro
+Exemplo:
+
+Aprovados: 1
+Reprovados: 1
+Pendentes: 2
+O gráfico divide:
+
+🟢 verde
+
+🔴 vermelho
+
+🟡 amarelo
+
+Tudo isso é atualizado automaticamente porque o Dashboard lê direto do banco:
+
+countByStatus(...)
+Então qualquer aprovação/reprovação altera o gráfico em tempo real ao atualizar a página.
+
+
+047d1d7d-6675-4f11-b3be-137f5b5f0b38.png
+Não estou encontrando o dashboard
+
+Então o dashboard ainda não foi inserido no admin-list.html.
+
+Sua tela mostra apenas a tabela dos parceiros.
+O bloco do dashboard precisa ficar ANTES da tabela.
+
+No arquivo:
+
+admin-list.html
+procure isto:
+
+<div class="card">
+    <table class="table">
+E ANTES disso cole:
+
+<div class="dashboard-grid">
+
+    <div class="card metric-card">
+        <span>Total</span>
+        <strong th:text="${dashboard.total}"></strong>
+    </div>
+
+    <div class="card metric-card success">
+        <span>Aprovados</span>
+        <strong th:text="${dashboard.aprovados}"></strong>
+    </div>
+
+    <div class="card metric-card danger">
+        <span>Reprovados</span>
+        <strong th:text="${dashboard.reprovados}"></strong>
+    </div>
+
+    <div class="card metric-card warning">
+        <span>Pendentes</span>
+        <strong th:text="${dashboard.pendentes}"></strong>
+    </div>
+
+</div>
+
+<div class="card">
+    <h3>Resumo das solicitações</h3>
+
+    <div class="chart-wrapper">
+        <canvas id="statusChart"></canvas>
+    </div>
+
+    <script th:inline="javascript">
+        const aprovados = [[${dashboard.aprovados}]];
+        const reprovados = [[${dashboard.reprovados}]];
+        const pendentes = [[${dashboard.pendentes}]];
+
+        const canvas = document.getElementById("statusChart");
+        const ctx = canvas.getContext("2d");
+
+        canvas.width = 360;
+        canvas.height = 360;
+
+        const data = [
+            { label: "Aprovados", value: aprovados, color: "#22c55e" },
+            { label: "Reprovados", value: reprovados, color: "#ef4444" },
+            { label: "Pendentes", value: pendentes, color: "#facc15" }
+        ];
+
+        const total = data.reduce((sum, item) => sum + item.value, 0);
+
+        let startAngle = -Math.PI / 2;
+        const centerX = canvas.width / 2;
+        const centerY = canvas.height / 2;
+        const radius = 120;
+
+        if (total === 0) {
+            ctx.fillStyle = "#e5e7eb";
+            ctx.beginPath();
+            ctx.arc(centerX, centerY, radius, 0, Math.PI * 2);
+            ctx.fill();
+
+            ctx.fillStyle = "#64748b";
+            ctx.font = "16px Arial";
+            ctx.textAlign = "center";
+            ctx.fillText("Sem dados", centerX, centerY);
+        } else {
+            data.forEach(item => {
+                const sliceAngle = (item.value / total) * Math.PI * 2;
+
+                ctx.beginPath();
+                ctx.moveTo(centerX, centerY);
+                ctx.arc(centerX, centerY, radius, startAngle, startAngle + sliceAngle);
+                ctx.closePath();
+                ctx.fillStyle = item.color;
+                ctx.fill();
+
+                startAngle += sliceAngle;
+            });
+        }
+    </script>
+
+    <div class="chart-legend">
+        <span><i class="legend-success"></i> Aprovados</span>
+        <span><i class="legend-danger"></i> Reprovados</span>
+        <span><i class="legend-warning"></i> Pendentes</span>
+    </div>
+</div>
+Depois confira se no AdminController você colocou:
+
+model.addAttribute("dashboard", partnerInstitutionService.getDashboardStatus());
+Sem isso o HTML não recebe os dados do dashboard.
+
+E no style.css precisa existir:
+
+.dashboard-grid
+.metric-card
+.chart-wrapper
+.chart-legend
+

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>ORTODOA | Pedido de parceria</title><link rel="stylesheet" th:href="@{/css/style.css}"></head>
+<body>
+<div class="topbar"><div class="brand"><span class="brand-mark">HC</span><span>Portal de Parcerias ORTODOA</span></div></div>
+<div class="container">
+    <div class="header-card hero"><div><h1>Pedido de parceria institucional</h1><p>Formulário para hospitais e instituições interessadas em colaborar com o ORTODOA.</p></div><a class="button secondary" th:href="@{/login}">Entrar no sistema</a></div>
+    <div th:if="${successMessage}" class="alert success" th:text="${successMessage}"></div><div th:if="${errorMessage}" class="alert error" th:text="${errorMessage}"></div>
+    <form th:action="@{/parceria}" th:object="${partnerInstitution}" method="post" class="card form-grid">
+        <div><label>Nome da instituição</label><input type="text" th:field="*{institutionName}"><small class="error-text" th:if="${#fields.hasErrors('institutionName')}" th:errors="*{institutionName}"></small></div>
+        <div><label>CNPJ</label><input type="text" th:field="*{cnpj}"><small class="error-text" th:if="${#fields.hasErrors('cnpj')}" th:errors="*{cnpj}"></small></div>
+        <div><label>Responsável</label><input type="text" th:field="*{responsibleName}"><small class="error-text" th:if="${#fields.hasErrors('responsibleName')}" th:errors="*{responsibleName}"></small></div>
+        <div><label>E-mail</label><input type="email" th:field="*{email}"><small class="error-text" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></small></div>
+        <div><label>Telefone</label><input type="text" th:field="*{phone}"><small class="error-text" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></small></div>
+        <div><label>Cidade</label><input type="text" th:field="*{city}"><small class="error-text" th:if="${#fields.hasErrors('city')}" th:errors="*{city}"></small></div>
+        <div><label>Estado</label><input type="text" th:field="*{state}"><small class="error-text" th:if="${#fields.hasErrors('state')}" th:errors="*{state}"></small></div>
+        <div class="full-width"><label>Motivo da parceria</label><textarea th:field="*{partnershipReason}" rows="5"></textarea><small class="error-text" th:if="${#fields.hasErrors('partnershipReason')}" th:errors="*{partnershipReason}"></small></div>
+        <div class="full-width form-actions"><button class="button" type="submit">Enviar pedido</button></div>
+    </form>
+    <div class="card hint"><h3>Como funciona</h3><p>1. A instituição preenche o formulário.</p><p>2. O sistema envia um e-mail no MailPit com login e senha aleatória.</p><p>3. A instituição já consegue acessar a área do parceiro.</p><p>4. Enquanto o admin não avalia, o status aparece como aprovação pendente.</p><p>5. O administrador aprova ou reprova com uma observação.</p></div>
+</div>
+</body></html>

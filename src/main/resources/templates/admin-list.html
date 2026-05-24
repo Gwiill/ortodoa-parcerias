@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin | Parceiros</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<div class="topbar">
+    <div class="brand">
+        <span class="brand-mark">HC</span>
+        <span>Portal de Parcerias ORTODOA</span>
+    </div>
+</div>
+
+<div class="container">
+
+    <div class="header-row">
+        <div>
+            <h1>Pedidos de parceria</h1>
+            <p>Analise os cadastros enviados pelas instituições parceiras.</p>
+        </div>
+
+        <form th:action="@{/logout}" method="post">
+            <input type="hidden"
+                   th:name="${_csrf.parameterName}"
+                   th:value="${_csrf.token}" />
+            <button class="button secondary" type="submit">Sair</button>
+        </form>
+    </div>
+
+    <div class="dashboard-grid">
+
+        <div class="card metric-card">
+            <span>Total</span>
+            <strong th:text="${dashboard.total}">0</strong>
+        </div>
+
+        <div class="card metric-card success">
+            <span>Aprovados</span>
+            <strong th:text="${dashboard.aprovados}">0</strong>
+        </div>
+
+        <div class="card metric-card danger">
+            <span>Reprovados</span>
+            <strong th:text="${dashboard.reprovados}">0</strong>
+        </div>
+
+        <div class="card metric-card warning">
+            <span>Pendentes</span>
+            <strong th:text="${dashboard.pendentes}">0</strong>
+        </div>
+
+    </div>
+
+    <div class="card">
+        <h3>Resumo das solicitações</h3>
+
+        <div class="chart-wrapper">
+            <canvas id="statusChart"></canvas>
+        </div>
+
+        <script th:inline="javascript">
+            const aprovados = [[${dashboard.aprovados}]];
+            const reprovados = [[${dashboard.reprovados}]];
+            const pendentes = [[${dashboard.pendentes}]];
+
+            const canvas = document.getElementById("statusChart");
+            const ctx = canvas.getContext("2d");
+
+            canvas.width = 360;
+            canvas.height = 360;
+
+            const data = [
+                { label: "Aprovados", value: aprovados, color: "#22c55e" },
+                { label: "Reprovados", value: reprovados, color: "#ef4444" },
+                { label: "Pendentes", value: pendentes, color: "#facc15" }
+            ];
+
+            const total = data.reduce((sum, item) => sum + item.value, 0);
+
+            let startAngle = -Math.PI / 2;
+            const centerX = canvas.width / 2;
+            const centerY = canvas.height / 2;
+            const radius = 120;
+
+            if (total === 0) {
+                ctx.fillStyle = "#e5e7eb";
+                ctx.beginPath();
+                ctx.arc(centerX, centerY, radius, 0, Math.PI * 2);
+                ctx.fill();
+
+                ctx.fillStyle = "#64748b";
+                ctx.font = "16px Arial";
+                ctx.textAlign = "center";
+                ctx.fillText("Sem dados", centerX, centerY);
+            } else {
+                data.forEach(item => {
+                    const sliceAngle = (item.value / total) * Math.PI * 2;
+
+                    ctx.beginPath();
+                    ctx.moveTo(centerX, centerY);
+                    ctx.arc(centerX, centerY, radius, startAngle, startAngle + sliceAngle);
+                    ctx.closePath();
+                    ctx.fillStyle = item.color;
+                    ctx.fill();
+
+                    startAngle += sliceAngle;
+                });
+            }
+        </script>
+
+        <div class="chart-legend">
+            <span><i class="legend-success"></i> Aprovados</span>
+            <span><i class="legend-danger"></i> Reprovados</span>
+            <span><i class="legend-warning"></i> Pendentes</span>
+        </div>
+    </div>
+
+    <div class="card table-card">
+        <table>
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Instituição</th>
+                <th>Status</th>
+                <th>Login</th>
+                <th>Ações</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr th:each="partner : ${partners}">
+                <td th:text="${partner.id}"></td>
+
+                <td th:text="${partner.institutionName}"></td>
+
+                <td>
+                    <span class="badge"
+                          th:classappend="${partner.status.name() == 'APROVADO' ? ' badge-success' : (partner.status.name() == 'REPROVADO' ? ' badge-danger' : ' badge-warning')}"
+                          th:text="${partner.status.name() == 'PENDENTE' ? 'APROVAÇÃO PENDENTE' : partner.status}">
+                    </span>
+                </td>
+
+                <td th:text="${partner.userAccount.username}"></td>
+
+                <td>
+                    <a class="link-action"
+                       th:href="@{'/admin/parceiros/' + ${partner.id}}">
+                        Ver detalhes
+                    </a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+</body>
+</html>
