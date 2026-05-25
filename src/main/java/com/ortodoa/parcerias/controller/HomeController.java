@@ -45,7 +45,7 @@ public class HomeController {
         try {
             partnerInstitutionService.registerNewPartner(partnerInstitution);
             redirectAttributes.addFlashAttribute("successMessage",
-                    "Pedido enviado com sucesso. Informações de acesso enviadas para o e-mail informado.");
+                    "Pedido enviado com sucesso. Informações de acesso enviadas para o e-mail informado");
         } catch (IllegalArgumentException e) {
             redirectAttributes.addFlashAttribute("errorMessage", e.getMessage());
             redirectAttributes.addFlashAttribute("partnerInstitution", partnerInstitution);
