@@ -45,7 +45,7 @@ public class HomeController {
         try {
             partnerInstitutionService.registerNewPartner(partnerInstitution);
             redirectAttributes.addFlashAttribute("successMessage",
-                    "Pedido enviado com sucesso. O login será o e-mail informado e a senha inicial será o CNPJ. O acesso só será liberado após aprovação do ADM.");
+                    "Pedido enviado com sucesso. Informações de acesso enviadas para o e-mail informado.");
         } catch (IllegalArgumentException e) {
             redirectAttributes.addFlashAttribute("errorMessage", e.getMessage());
             redirectAttributes.addFlashAttribute("partnerInstitution", partnerInstitution);
