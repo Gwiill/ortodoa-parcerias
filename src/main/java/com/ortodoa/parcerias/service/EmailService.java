@@ -45,7 +45,7 @@ public class EmailService {
                 institution.getEmail(),
                 institution.getCnpj(),
                 institution.getEmail(),
-                institution.getCnpj()
+                institution.getTemporaryPassword()
         );
 
         send(institution.getEmail(), subject, body);
@@ -58,24 +58,25 @@ public class EmailService {
                 ? institution.getAdminNote()
                 : "Sem observações do administrador.";
 
-        String body = """
-                Olá!
+             String body = """
+              Olá!
 
-                Sua solicitação de parceria foi APROVADA.
+               Sua solicitação de parceria foi APROVADA.
 
-                Observação do administrador:
-                %s
+               Observação do administrador:
+               %s
 
-                Credenciais de acesso ao portal:
-                - Login: %s
-                - Senha inicial: %s
+               Seu acesso ao portal já está liberado.
 
-                Atenciosamente,
-                Equipe ORTODOA
-                """.formatted(
+               Utilize o login e senha enviados no primeiro e-mail.
+
+               Login: %s
+    
+               Atenciosamente,
+               Equipe ORTODOA
+        """.formatted(
                 note,
-                institution.getEmail(),
-                institution.getCnpj()
+                institution.getEmail()
         );
 
         send(institution.getEmail(), subject, body);

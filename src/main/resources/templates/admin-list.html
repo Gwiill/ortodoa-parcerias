@@ -58,65 +58,63 @@
     <div class="card">
         <h3>Resumo das solicitações</h3>
 
-        <div class="chart-wrapper">
-            <canvas id="statusChart"></canvas>
-        </div>
+        <div id="statusChart" style="width: 100%; height: 380px;"></div>
+
+        <script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
 
         <script th:inline="javascript">
             const aprovados = [[${dashboard.aprovados}]];
             const reprovados = [[${dashboard.reprovados}]];
             const pendentes = [[${dashboard.pendentes}]];
 
-            const canvas = document.getElementById("statusChart");
-            const ctx = canvas.getContext("2d");
+            const chart = echarts.init(document.getElementById('statusChart'));
 
-            canvas.width = 360;
-            canvas.height = 360;
+            const option = {
+                tooltip: {
+                    trigger: 'item'
+                },
 
-            const data = [
-                { label: "Aprovados", value: aprovados, color: "#22c55e" },
-                { label: "Reprovados", value: reprovados, color: "#ef4444" },
-                { label: "Pendentes", value: pendentes, color: "#facc15" }
-            ];
+                legend: {
+                    bottom: 0
+                },
 
-            const total = data.reduce((sum, item) => sum + item.value, 0);
+                series: [
+                    {
+                        name: 'Status das solicitações',
+                        type: 'pie',
+                        radius: ['40%', '70%'],
 
-            let startAngle = -Math.PI / 2;
-            const centerX = canvas.width / 2;
-            const centerY = canvas.height / 2;
-            const radius = 120;
+                        data: [
+                            {
+                                value: aprovados,
+                                name: 'Aprovados',
+                                itemStyle: { color: '#22c55e' }
+                            },
 
-            if (total === 0) {
-                ctx.fillStyle = "#e5e7eb";
-                ctx.beginPath();
-                ctx.arc(centerX, centerY, radius, 0, Math.PI * 2);
-                ctx.fill();
+                            {
+                                value: reprovados,
+                                name: 'Reprovados',
+                                itemStyle: { color: '#ef4444' }
+                            },
 
-                ctx.fillStyle = "#64748b";
-                ctx.font = "16px Arial";
-                ctx.textAlign = "center";
-                ctx.fillText("Sem dados", centerX, centerY);
-            } else {
-                data.forEach(item => {
-                    const sliceAngle = (item.value / total) * Math.PI * 2;
+                            {
+                                value: pendentes,
+                                name: 'Pendentes',
+                                itemStyle: { color: '#facc15' }
+                            }
+                        ]
+                    }
+                ]
+            };
 
-                    ctx.beginPath();
-                    ctx.moveTo(centerX, centerY);
-                    ctx.arc(centerX, centerY, radius, startAngle, startAngle + sliceAngle);
-                    ctx.closePath();
-                    ctx.fillStyle = item.color;
-                    ctx.fill();
+            chart.setOption(option);
 
-                    startAngle += sliceAngle;
-                });
-            }
+            window.addEventListener('resize', function () {
+                chart.resize();
+            });
         </script>
 
-        <div class="chart-legend">
-            <span><i class="legend-success"></i> Aprovados</span>
-            <span><i class="legend-danger"></i> Reprovados</span>
-            <span><i class="legend-warning"></i> Pendentes</span>
-        </div>
+
     </div>
 
     <div class="card table-card">
