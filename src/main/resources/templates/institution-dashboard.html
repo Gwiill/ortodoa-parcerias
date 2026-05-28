@@ -2,7 +2,7 @@
 <html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
 <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Instituição | Painel</title><link rel="stylesheet" th:href="@{/css/style.css}"></head>
 <body>
-<div class="topbar"><div class="brand"><span class="brand-mark">HC</span><span>Portal de Parcerias ORTODOA</span></div></div>
+<div class="topbar"><div class="brand"><span class="brand-mark">OT</span><span>Portal de Parcerias ORTODOA</span></div></div>
 <div class="container narrow-wide">
     <div class="header-row"><div><h1>Painel da instituição</h1><p th:text="${partner.institutionName}"></p></div><form th:action="@{/logout}" method="post"><button class="button secondary" type="submit">Sair</button></form></div>
     <div class="status-panel" th:classappend="${partner.status.name() == 'APROVADO' ? ' status-success' : (partner.status.name() == 'REPROVADO' ? ' status-danger' : ' status-warning')}">
