@@ -47,6 +47,8 @@ Depois abra:
 - `http://localhost:8080/`
 - `http://localhost:8080/login`
 - `http://localhost:8080/h2-console`
+- Rodar o Mailpit executar no console: "docker start mailpit"
+- Para acessar Mailpit: http://localhost:8025
 
 ## H2 Console
 Use estas configurações:
