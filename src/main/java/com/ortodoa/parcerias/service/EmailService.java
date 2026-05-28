@@ -38,7 +38,7 @@ public class EmailService {
                 - Login: %s
                 - Senha inicial: %s
                 
-                Observação: Você pode acessar sua área de status do formulário, utilizando as mesmas credênciais acima.
+                Observação: Você pode acessar sua área de status da solicitação, utilizando as mesmas credênciais acima.
 
                 Atenciosamente,
                 Equipe ORTODOA
