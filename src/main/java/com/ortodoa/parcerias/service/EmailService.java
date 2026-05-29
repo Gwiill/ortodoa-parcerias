@@ -61,7 +61,7 @@ public class EmailService {
                 : "Sem observações do administrador.";
 
              String body = """
-              Olá!
+               Olá!
 
                Sua solicitação de parceria foi APROVADA.
 
@@ -72,7 +72,7 @@ public class EmailService {
     
                Atenciosamente,
                Equipe ORTODOA
-        """.formatted(
+               """.formatted(
                 note,
                 institution.getEmail()
         );
