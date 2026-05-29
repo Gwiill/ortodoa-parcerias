@@ -94,6 +94,8 @@ public class EmailService {
 
                 Observação do administrador:
                 %s
+                
+                Você pode realizar uma nova solicitação a qualquer momento.
 
                 Atenciosamente,
                 Equipe ORTODOA
