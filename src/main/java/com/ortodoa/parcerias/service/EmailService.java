@@ -31,7 +31,7 @@ public class EmailService {
                 - E-mail: %s
                 - CNPJ: %s
 
-                Sua solicitação está em análise.
+                Sua solicitação está em análise
                 Você receberá uma nova notificação por e-mail assim que o administrador aprovar ou reprovar o pedido.
 
                 Credenciais para acesso ao portal após aprovação:
