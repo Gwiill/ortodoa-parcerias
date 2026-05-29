@@ -69,10 +69,6 @@ public class EmailService {
                %s
 
                Seu acesso ao portal já está liberado.
-
-               Utilize o login e senha enviados no primeiro e-mail.
-
-               Login: %s
     
                Atenciosamente,
                Equipe ORTODOA
@@ -98,10 +94,6 @@ public class EmailService {
 
                 Observação do administrador:
                 %s
-
-                Credenciais registradas:
-                - Login: %s
-                - Senha inicial: %s
 
                 Atenciosamente,
                 Equipe ORTODOA
